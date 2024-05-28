@@ -75,9 +75,9 @@ jobs:
           LABEL org.opencontainers.image.licenses=MIT
           ARG TARGETARCH
           COPY ${{ env.ARTIFACT_PREFIX }}_\${TARGETARCH}.deb .
-          RUN apt-get install -y ./${{ env.ARTIFACT_PREFIX }}_\${TARGETARCH}.deb && rm -f ./${{ env.ARTIFACT_PREFIX }}_\${TARGETARCH}.deb
-          RUN ${{ inputs.dockerfile-run }}
-          RUN rm -rf /var/lib/apt/lists/*
+          RUN apt-get install -y ./${{ env.ARTIFACT_PREFIX }}_\${TARGETARCH}.deb && rm -f ./${{ env.ARTIFACT_PREFIX }}_\${TARGETARCH}.deb && \
+            ${{ inputs.dockerfile-run }} && \
+            rm -rf /var/lib/apt/lists/*
           EXPOSE 443
           EXPOSE 8000
           EXPOSE 8080
